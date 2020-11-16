@@ -1,0 +1,19 @@
+version: "3"
+services:
+  docker-registry-local:
+    image: registry:2
+    ports:
+      - 5000:5000
+    restart: on-failure
+  docker-registry-ui:
+    image: jc21/registry-ui
+    ports:
+      - 5001:80
+    environment:
+      - REGISTRY_HOST=docker-registry-local:5000
+      - REGISTRY_SSL=false
+      - REGISTRY_DOMAIN=docker-registry-local:5000
+      - REGISTRY_STORAGE_DELETE_ENABLED=
+      - REGISTRY_USER=
+      - REGISTRY_PASS=
+    restart: on-failure
